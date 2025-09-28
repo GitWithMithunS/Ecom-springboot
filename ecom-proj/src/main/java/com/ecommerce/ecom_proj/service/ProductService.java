@@ -30,4 +30,27 @@ public class ProductService {
 
         return productRepository.save(product);
     }
+
+
+    public Product updateProduct(int prodId, Product product, MultipartFile imageFile) throws IOException {
+        if(!productRepository.existsById(prodId)){
+            throw new RuntimeException("product of id" + prodId + " not found");
+        }
+
+        product.setId(prodId);
+
+        product.setImageData(imageFile.getBytes());
+        product.setImageName(imageFile.getOriginalFilename());
+        product.setImageType(imageFile.getContentType());
+
+        productRepository.save(product);
+
+        return product;
+    }
+
+    public void deleteProduct(int prodId) {
+        productRepository.deleteById(prodId);
+    }
+
+
 }
