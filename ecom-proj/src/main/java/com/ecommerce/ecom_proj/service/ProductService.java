@@ -37,7 +37,7 @@ public class ProductService {
             throw new RuntimeException("product of id" + prodId + " not found");
         }
 
-        product.setId(prodId);
+        product.setId(prodId);   //important
 
         product.setImageData(imageFile.getBytes());
         product.setImageName(imageFile.getOriginalFilename());
@@ -53,4 +53,7 @@ public class ProductService {
     }
 
 
+    public List<Product> searchProduct(String keyword) {
+        return productRepository.searchProduct(keyword);
+    }
 }
